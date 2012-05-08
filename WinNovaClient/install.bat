@@ -20,13 +20,17 @@ dir
 
 pushd
 echo "Going to install Active Python 2.7"
-call ActivePython-2.7.2.5-win32-x86.msi
+pushd
+call APy.msi
+popd
 echo "Done installing Active Python 2.7"
 popd
 
 pushd
 echo "Setting environment paths"
-set PATH=%PATH%;c:\Python2.7;c:\Python2.7\Scripts
+set PYHOME=c:\Python27
+set PYSCRIPTS=%PYHOME%\Scripts
+set PATH=%PATH%;%PYHOME%;%PYSCRIPTS%
 echo "Done Setting paths: %PATH"
 popd
 

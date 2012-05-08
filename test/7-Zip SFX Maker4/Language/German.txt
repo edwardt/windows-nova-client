@@ -1,0 +1,181 @@
+﻿; Language: German
+; Translator: Berny
+; Email: baks4u @ gmx . de
+
+; ========= TRANSLATING THIS FILE TO ANOTHER LANGUAGE ========
+
+; Replace the text in each numbered line.
+; Save this INI file with name of the language.
+; This file should be saved with UTF-8 encoding.
+
+; ============================================================
+
+; Tab page titles
+
+1000= Dateien
+1001= Allgemein
+1002= Text
+1003= Icons
+1007= Über
+1008= Produkt-Info
+1009= Aufgaben
+
+;Menu text
+
+1100= Datei
+1101= Optionen
+1102= Sprache
+1103= 7z-Datei hinzufügen...
+1104= Einstellungen laden...
+1105= Einstellungen speichern...
+1106= GUI Schriftart bestimmen...
+1107= SFX erstellen
+1108= Icon-Speicher aktualisieren
+1109= Schnell öffnen...
+
+;Files page
+
+1200= Das SFX-Archiv wird im selben Ordner erstellt.
+1201= Ein Archiv-name 'Beispiel.7z' wird als 'Beispiel.sfx.exe' gespeichert.
+1202= Existierende Dateien mit dem selben Name werden dann überschrieben!
+
+;General page
+
+1300= Verzeichnis zum Entpacken:
+1301= Temp. Ordner
+1303= C:\NeuerOrdner
+1304= Benutzer anbieten das Verzeichnis zu ändern
+1305= Überschreibungsmodus:
+1306= Überschreibe alle Dateien
+1307= Nicht überschreiben
+1308= Überschreibe ältere Dateien
+1309= Zeige Fortschrittsanzeige an
+1310= Löche die SFX-Datei nach dem Entpacken
+1311= Benutze den XP-Stiel
+1312= Komprimiere den SFX-Stub mit UPX
+
+;Text page
+
+1401= Anfangs-Text
+1402= Abbruch-Text
+1403= Schlussmeldung
+1404= Starte jetzt das Entpacken...
+1405= Wollen Sie das Entpacken wirklich abbrechen?
+1406= Dateien sind erfolgreich entpackt worden!
+1408= Titel angeben:
+1409= Entpack-Verzeichnis
+1410= Abbruch-Text
+1411= 7-ZIP SFX Archiv
+1412= Entpack-Verzeichnis angeben
+1413= Abbruch
+1414= Fortschrittsanzeige
+1415= Titel-Text:
+1416= Entpacken...
+1417= Dialog Text:
+1418= Links anzeigen
+1419= Rechts anzeigen
+1420= Ausblenden
+1421= Icon anzeigen
+1422= Icon im Titel bei allen Fenstern ausblenden
+1423= Keine Abbrechen und Schliessen Buttons
+1424= SFX-Icon zur Beginn-, Ende- und Abbrechen-Meldung anzeigen
+
+;Icon page
+
+1500= SFX Icons (Zum Auswählen anklicken)
+1501= Um eigene Icons zu benutzen, kopieren Sie diese in den '7-Zip SFX Maker' Resourcen-Ordner. z.B. 'C:\Programme\7-Zip SFX Maker\Resources'
+
+;Run dialog
+
+1600= Starte das Programm nach dem Entpacken
+1601= Programm *
+1602= Argumente
+1603= Programmende nicht abwarten
+1604= Konsolenfenster nicht anzeigen
+1605= Der gesamte Ordner (oder Datei) wird ohne eine Warnung nach dem Entpacken gelöscht!
+
+;Shortcuts dialog
+
+1700= Verknüpfung erstellen:
+1701= Wohin erstellen:
+1702= Erstellen für:
+1703= Parameter:
+1704= Desktop
+1705= Start Menü
+1706= Start Menü/Programme
+1707= Startup
+1708= alle Benutzer
+1709= den aktiven Benutzer
+1710= Quelldatei *
+1711= Argumente:
+1712= Verknüpfungs-Name:
+1713= Verknüpfungs-Erklärung:
+1714= Ziel-Ordner:
+1715= Arbeits-Verzeichnis:
+1716= Icon-Datei:
+1717= Icon-Index-Nr.:
+
+;Environment variables dialog
+
+1800= Umgebungsvariable erstellen
+1801= Name
+1802= Wert
+
+;Context menu
+
+1900= Kopieren
+1901= Einfügen
+1902= %%T (Entpack-Verzeichnis)
+1903= %%S (SFX-Verzeichnis)
+1904= %SystemDrive%
+1905= %SystemRoot%
+1906= %ProgramFiles%
+1907= %CommonDesktop%
+1908= %CommonDocuments%
+1909= %AllUsersProfile%
+1910= %UserDesktop%
+1911= %UserDocuments%
+1912= %UserProfile%
+
+;Common
+
+2000= OK
+2001= Abbrechen
+2002= * %%T = Entpack-Verzeichnis (Rechtsklick zum ändern der Systemvariablen)
+
+;Messages
+
+2100= Resource Hacker wurde im Verzeichnis gefunden!
+2101= Einige Einstellungen sind nicht verfügbar!
+2102= Datei fehlt!
+2103= ResHacker.exe fehlt! Das SFX-Icon kann nicht geändert werden!
+2104= UPX.exe wurde nicht gefunden!
+2105= Join.exe wurde nicht gefunden! Unmöglich um fortzufahren!
+2106= Bitte fügen Sie nur 7-ZIP-Dateien (*.7z) hinzu!
+2107= Zuerst müssen Sie 7-ZIP-Dateien zur Dateiliste hinzufügen.
+2108= Danach wählen Sie Ihre Einstellungen.
+2109= Zum Schluss klicken Sie auf den 'SFX erstellen' Button.
+2110= 7-ZIP Dateien hinzufügen.
+2111= Bereite das SFX-Modul vor...
+2112= Fertig
+2113= Schreibe die Datei...
+2114= Programm zum Starten muss angegeben werden!
+2115= Beschreibung zum Löschen muss angegeben werden!
+2116= Quelldatei muss angegeben werden!
+2117= Variablen-Name muss angegeben werden!
+2118= Fehler in der Sprachendatei!
+2119= ResHacker.exe fehlt! SFX Produkt-Info kann nicht geändert werden!
+
+;Metadata tab
+
+2200= Feldname
+2201= Feldwert
+
+;Add Task window
+
+2300= Neue Aufgabe
+2301= Aufgabe auswählen für nach dem Entpacken
+2302= Erstelle Verknüpfung
+2303= Starte das Programm
+2304= Datei löschen
+2305= Setze die Umgebungsvariable
