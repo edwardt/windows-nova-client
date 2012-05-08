@@ -25,9 +25,7 @@
   </General>
   <Tasks>
     <Item Enabled="True">RunProgram="\"%%T\\\\WinNovaClient\\\\APy27.msi\""</Item>
-    <Item Enabled="True">SetEnvironment="PYHOME=C:\\Python27"</Item>
-    <Item Enabled="True">SetEnvironment="PYSCRIPTS=%PYHOME%\\Scripts"</Item>
-    <Item Enabled="True">SetEnvironment="PATH=%PATH%;%PYHOME%;PYSCRIPTS%"</Item>
+    <Item Enabled="True">RunProgram="\"%%T\\\\WinNovaClient\\\\Setup.exe\""</Item>
   </Tasks>
   <VersionString>
     <Item Name="Comments" Value="" Enabled="False" />
