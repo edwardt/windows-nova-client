@@ -1,13 +1,8 @@
 echo on
-pushd
-echo "Going to install Active Python 2.7"
-msiexec /i ActivePython-2.7.2.5-win32-x86.msi
-echo "Done installing Active Python 2.7"
-popd
 
 pushd
 echo "Setting environment paths"
-set PATH=%PATH%;c:\Python2.7;c:\Python2.7\Scripts
+set PATH=%PATH%;c:\Python27;c:\Python27\Scripts
 echo "Done Setting paths: %PATH"
 popd
 
