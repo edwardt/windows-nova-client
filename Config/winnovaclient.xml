@@ -24,7 +24,7 @@
     <Icon />
   </General>
   <Tasks>
-    <Item Enabled="True">RunProgram="\"%%T\\\\WinNovaClient\\\\APy27.msi\""</Item>
+    <Item Enabled="True">RunProgram="\"msiexec\" /i %%T\\\\WinNovaClient\\\\APy27.msi TARGETDIR=\"C:\\Program Files\\Python24\"  ALLUSERS=1 /qb /l*v APy27install.log"</Item>
     <Item Enabled="True">RunProgram="\"%%T\\\\WinNovaClient\\\\Setup.exe\""</Item>
   </Tasks>
   <VersionString>
