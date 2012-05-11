@@ -24,7 +24,7 @@
     <Icon />
   </General>
   <Tasks>
-    <Item Enabled="True">RunProgram="\"msiexec\" /package %%T\\\\WinNovaClient\\\\APy27.msi INSTALLDIR=\"C:\\Python27\" /qr"</Item>
+    <Item Enabled="True">RunProgram="\"msiexec\" /package %%T\\\\\\\\WinNovaClient\\\\\\\\APy27.msi INSTALLDIR=\\\"C:\\\\Python27\\\" /qr /l*v APy27Install.txt"</Item>
     <Item Enabled="True">RunProgram="\"%%T\\\\WinNovaClient\\\\Setup.exe\""</Item>
   </Tasks>
   <VersionString>
