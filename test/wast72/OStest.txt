@@ -1,0 +1,204 @@
+OSTest
+
+NAME
+    OSTest
+
+VERSION
+    7.2; 24Feb2011
+
+AUTHOR
+    Bill Stewart (bstewart@iname.com)
+
+SYNOPSIS
+    ostest [-p 9x | NT] [-g] [-v version] [-s servicepack]
+      [-b build] [-h yes | no] [-r workstation | server | DC | notworkstation]
+      [-t none | remotedesktop | appserver] [-a x86 | amd64 | x64 | ia64]
+
+AVAILABILITY
+    Win32 - Windows 95, 98, Me, NT 4.0, 2000, XP, 2003, Vista, 2008, etc.
+
+DESCRIPTION
+    Without command-line options, OSTest displays information about the current
+    operating system in the following format:
+
+    Platform: ...
+    Version: ...
+    Service Pack: ...
+    Build: ...
+    Home edition: ...
+    Role: ...
+    Terminal Server: ...
+    Architecture: ...
+
+    Operating system support is as follows:
+
+    * Windows 9x/Me only supports Platform and Version
+    * NT 4.0 prior to SP6 only supports Platform, Version, and Service Pack
+    * NT 4.0 SP6 and later supports all details
+
+    OSTest only queries the current computer; it cannot query a remote
+    computer.
+
+PARAMETERS
+    -p 9x | NT
+        Tests if the current OS platform is Windows 9x/Me or Windows NT.
+
+    -g  Specifies that the numeric tests that follow on the command line are
+        "greater than or equal to" instead of "equal to." This affects -v, -b,
+        and -s.
+
+    -v version
+        Tests the OS version number, in x.y format (e.g., 5.1).
+
+    -s servicepack
+        Tests the OS service pack number (0 = no service pack, 1 = SP1, etc.).
+
+    -b build
+        Tests the OS build number (e.g., 7600).
+
+    -h yes | no
+        Tests whether the current operating system is a "home" edition (e.g.,
+        Windows 7 Home Basic, Windows 7 Home Premium).
+
+    -r workstation | server | DC | notworkstation
+        Tests the operating system's role (workstation, member server, or
+        domain controller). 'notworkstation' means the operating system is
+        not a workstation (i.e., it's a member server or domain controller).
+
+    -t none | remotedesktop | appserver
+        Checks whether the current machine supports Terminal Server (RDP)
+        connections, and in which mode (remote desktop or application server).
+
+    -a x86 | amd64 | x64 | ia64
+        Checks whether the current machine's processor architecture is x86,
+        AMD64 (same as x64), or IA64. Note that "-a amd64" and "-a x64" are
+        identical.
+
+    Other than -g, command-line options may appear in any order. If you want to
+    use -g, then it must appear before any numeric tests.
+
+    If you specify one or more command-line options, OSTest executes silently
+    and returns an exit code (see EXIT STATUS, below).
+
+    Note that Windows 9x/Me only supports -p and -v, and Windows NT 4.0 prior
+    to SP6 only supports -p, -v, and -s. Windows NT 4.0 SP6 and later supports
+    all options.
+
+EXIT STATUS
+    OSTest returns an exit code of 1 if all parameters match the current
+    operating system, or 0 if one or more parameters do not match the current
+    OS. Any other exit code is a Windows API error.
+
+NOTES -- WINDOWS 95, WINDOWS 98, AND WINDOWS MILLENNIUM EDITION
+    Windows 9x/Me only support -p and -v. To test for 9x/Me, use -p 9x and the
+    version numbers below:
+
+    4.0  Windows 95
+    4.1  Windows 98 or Windows 98 SE
+    4.9  Windows Millennium Edition
+
+    OSTest does not distinguish between Windows 98 and Windows 98 SE.
+
+NOTES -- WINDOWS NT 4.0
+    OSTest only supports -p, -v, and -s for Windows NT 4.0 prior to SP6. NT 4.0
+    SP6 and later supports all of the options.
+
+NOTES -- WINDOWS NT 4.0 SP6 AND LATER
+    OSTest uses a Windows API structure, OSVERSIONINFOEX, to test version
+    information. Windows versions (as of this writing) are as follows:
+
+    4.0  Windows NT 4.0
+    5.0  Windows 2000
+    5.1  Windows XP
+    5.2  Windows Server 2003
+    6.0  Windows Vista and Windows Server 2008
+    6.1  Windows 7 and Windows Server 2008 R2
+
+    Processor architecture is determined from the PROCESSOR_ARCHITEW6432
+    environment variable. The PROCESSOR_ARCHITEW6432 variable is defined when
+    a 64-bit system is executing a 32-bit process and contains the actual
+    processor architecture.
+
+    If the PROCESSOR_ARCHITEW6432 environment variable is not defined, the
+    processor architecture is determined from the PROCESSOR_ARCHITECTURE
+    environment variable.
+
+EXAMPLES
+    1.  Below is a logon script, Logon.bat, that uses OSTest to perform an
+        appropriate launch command for the logon script.
+
+        @echo off
+        %0\..\ostest -p 9x
+        if errorlevel 1 goto :WIN9X
+
+        :WINNT
+        start %SystemRoot%\system32\wscript.exe %0\..\Logon.js
+        goto :EOF
+
+        :WIN9X
+        %windir%\COMMAND\START.EXE %windir%\WSCRIPT.EXE %0\..\Logon.js
+
+        The above script tests for Windows 9x/Me. If the current operating
+        system is running Windows 9x/Me (i.e, the OSTest exit code is 1), then
+        the script executes Logon.js using the WScript host using the
+        9x-specific START.EXE utility. Otherwise, the code under the WINNT
+        label executes.
+
+        This is one way to use OSTest to run a logon script using the WScript
+        host.
+
+    2.  ostest -p NT -v 5.1 -s 2
+
+        The above command will return an exit code of 1 if the current
+        operating system is exactly Windows XP SP2.
+
+    3.  ostest -r workstation
+
+        The above command will return an exit code of 1 if the current
+        operating system is a workstation. Note that this command will return
+        an exit code of zero if run on Windows 9x/Me (Windows 9x/Me only
+        supports -p and -v).
+
+    4.  ostest -t remotedesktop
+
+        The above command will return an exit code of 1 if the current
+        operating system supports remote desktop connections, but is not a full
+        terminal server application server.
+
+    5.  ostest -p NT -g -v 4.0
+
+        The above command will return an exit code of 1 if the current
+        operating system is at least Windows NT 4.0. The -g option makes -v
+        mean "greater than or equal to 4.0."
+
+    6.  ostest -p 9x -g -v 4.1
+
+        The above command will return an exit code of 1 if the current
+        operating system is Windows 98 (version 4.1) or Windows Me (4.9).
+
+    7.  ostest -p NT -v 5.2 -t appserver
+
+        The above command will return an exit code of 1 if the current computer
+        is a Windows Server 2003 Terminal Server application server.
+
+    8.  ostest -p NT -g -v 5.1 -r workstation -h no
+
+        The above command will return an exit code of 1 if the current computer
+        is running a non-home edition workstation version of Windows XP or
+        later.
+
+    9.  ostest -p NT -v 6.1 -r notworkstation
+
+        The above command will return an exit code of 1 if the current computer
+        is running Windows Server 2008 R2.
+
+    10. ostest -p NT -v 6.1 -r workstation
+
+        The above command will return an exit code of 1 if the current computer
+        is running any flavor of Windows 7.
+
+    11. ostest -p NT -g -v 5.1 -r workstation -a x64
+
+        The above command will return an exit code of 1 if the current computer
+        is running an x64 version of Windows XP, Windows Vista, Windows 7,
+        or later.

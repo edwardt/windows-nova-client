@@ -1,0 +1,18 @@
+Windows Admin Script Tools
+(C) 2001-2011 by Bill Stewart (bstewart@iname.com)
+
+These programs may be used freely in any environment without payment to the
+author, with the following conditions:
+
+* Give me credit. Credit should go where it's due.
+
+* Let me know how the software is being used.
+
+* The programs and associated documentation files must not be modified.
+
+* The software cannot be bundeled with other software without first getting
+  permission from the author.
+
+These programs are distributed in the hope that they will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE.

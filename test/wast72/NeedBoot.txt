@@ -1,0 +1,75 @@
+NeedBoot
+
+NAME
+    NeedBoot
+
+VERSION
+    7.2; 24Feb2011
+
+AUTHOR
+    Bill Stewart (bstewart@iname.com)
+
+SYNOPSIS
+    needboot [-l | -q]
+
+AVAILABILITY
+    Win32 - Windows 95, 98, Me, NT 4.0, 2000, XP, 2003, Vista, 2008, etc.
+
+DESCRIPTION
+    NeedBoot determines if a reboot is required by checking if the system is
+    set to rename or delete files at the next boot.
+
+    On the Windows 9x/Me platform, it checks for the existence of any entries
+    in the [Rename] section of the WININIT.INI file in the Windows directory.
+    If the [Rename] section exists and has one or more entries, NeedBoot will
+    return 1.
+
+    On the Windows NT platform, it checks for the existence of the
+    PendingFileRenameOperations entry in the following registry key:
+
+        HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Session Manager
+
+    If this registry entry exists, NeedBoot will return 1.
+
+PARAMETERS
+    -l  List the entries in the [Rename] section of WININIT.INI (Win9x/Me) or
+        the contents of the PendingFileRenameOperations registry entry (Windows
+        NT 4.0 and later).
+
+        On Windows 9x/Me, -l displays output as follows:
+
+          [Rename] section of WININIT.INI contains:
+
+          Key1=Value1
+          ...
+
+        On the Windows NT platform (Windows NT 4.0 and later), -l displays
+        output as follows:
+
+          PendingFileRenameOperations registry value contains:
+
+          Source: <sourcefilename>
+          Target: <targetfilename>
+          ...
+
+        The PendingFileRenameOperations registry value contains pairs of
+        strings. The first string in the pair is the source filename, and the
+        second string is the new name for the file. If the second string is
+        empty, then the system will delete the file (the target filename will
+        be displayed as "(DELETE)").
+
+        If the PendingFileRenameOperations registry value exists but contains
+        no data, NeedBoot will still report that a reboot is needed. This is an
+        erroneous condition: Normally, the value should not exist but contain
+        no data. You can safely delete it using a registry editor.
+
+        On either platform, if -l says "(no data)", it will report that a
+        reboot is not needed; otherwise, it will report that a reboot is
+        needed.
+
+    -q  Run quietly (suppress output). If you specify both -q and -l, -l takes
+        precedence.
+
+EXIT STATUS
+    0   A reboot is not needed.
+    1   A reboot is needed.

@@ -1,0 +1,84 @@
+IsMember
+
+NAME
+    IsMember
+
+VERSION
+    7.2; 24Feb2011
+
+AUTHOR
+    Bill Stewart (bstewart@iname.com)
+
+SYNOPSIS
+    ismember -l
+    ismember [-v] groupname [...]
+
+AVAILABILITY
+    Win32 on Windows NT 4.0 or later (2000, XP, 2003, Vista, 2008, etc.)
+
+DESCRIPTION
+    IsMember checks if the currently logged-on user is a member of one or more
+    groups.
+
+PARAMETERS
+    -l
+        Lists the currently logged on user's group memberships.
+
+    -v
+        Outputs each match when found.
+
+    groupname
+        Specifies the name of the group to check. You can specify multiple
+        groups. Group names should be prefixed by the security authority, and a
+        "\" character. Some security authorities:
+
+        BUILTIN\
+            Specifies a built-in group, such as Users, Power Users, and
+            Administrators
+
+        NT AUTHORITY\
+            Specifies an NT Authority group, such as Authenticated Users and
+            INTERACTIVE
+
+        DOMAINNAME\ or COMPUTERNAME\
+            Specifies a domain or computer name
+
+        If a group name contains spaces, remember to enclose it in quotes.
+
+EXIT STATUS
+    0
+        Unsupported operating system, or the current user is not a member of
+        any of the named groups.
+
+    > 0
+        Current user is a member of one or more groups. The exit code will
+        correspond to the number of groups matched.
+
+EXAMPLES
+    1. ismember "MYDOMAIN\Domain Admins"
+       if errorlevel 1 goto :DOMADM
+
+       With these two lines in a shell script, it will branch to the label
+       :DOMADM if the currently logged on user is a member of the group
+       MYDOMAIN\Domain Admins.
+
+    2. ismember LOCALPC\GroupName1 "MYDOMAIN\Special Group 2"
+       if errorlevel 2 goto :BOTH
+       if errorlevel 1 goto :ONE
+       echo No match found
+
+       The above example will branch to :BOTH if a user is a member of both
+       groups. It will branch to :ONE if a user is a member of one of the two
+       groups. To see which group(s) matched, use -v.
+
+    3. ismember -l
+
+       This displays output in the following format:
+
+       BUILTIN\Administrators
+       BUILTIN\Users
+       Everyone
+       LOCAL
+       NT AUTHORITY\Authenticated Users
+       NT AUTHORITY\INTERACTIVE
+       6 groups(s) found

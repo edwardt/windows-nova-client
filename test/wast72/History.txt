@@ -1,0 +1,152 @@
+Windows Admin Script Tools
+(C) 2001-2011 by Bill Stewart (bstewart@iname.com)
+
+Version History
+
+Version 7.2 (2011 Feb 24)
+
+*   Fixed bug in OSTest -b argument -- it was doing a "greater than" test 
+    instead of an "equals" test.
+
+*   Added -a argument to OSTest to detect processor architecture.
+
+*   Added 'notworkstation' parameter to OSTest's -r argument. You can use this
+    to detect if the current OS is not a workstation (i.e., it's a member 
+    server or a domain controller).
+
+Version 7.1 (2010 Mar 18)
+
+*   Updated license agreement -- no more bundling of these tools without
+    permission.
+
+*   I no longer use UPX compression on the executables as this has a tendency
+    to get executables flagged as suspicious and/or malware.
+
+*   IsMember.exe now uses an exit code of 0 for 'unsupported operating system'
+    instead of 255, as it is possible for a user to be a member of 255 groups.
+
+*   Corrected version numbers in the History.txt file.
+
+Version 7.0 (2009 Jun 15)
+
+*   FVER.EXE's file comparison algorithm, which formerly used a single
+    floating-point number, did not work as expected; e.g., it would misreport
+    version 6.9 as being less than version 6.12. (Thanks to Michael Klement for
+    the report.) As a result, FVER.EXE has been replaced with FVerTest.exe that
+    uses full version numbers instead. Note that the command-line syntax and
+    exit codes are different than FVER.EXE. In particular, note that -f is not
+    used, -v must be specified before the filename on the command line, and -q
+    is required to make FVerTest run quietly.
+
+*   ISAdmin.exe can now detect when a user is a member of Administrators, but
+    the Administrators group is not enabled; this is the case when UAC is
+    active on Windows Vista and later. (Thanks to Michael Klement for the
+    suggestion and some implementation details.)
+
+*   Compiled with Free Pascal 2.2.2.
+
+Version 6.5 (2007 May 24)
+
+*   Replaced OSVER and OSVEREX with OSTEST.
+
+*   Corrected memory leak in RASCONNS.
+
+*   Corrected potential buffer overflow in WINMSG.
+
+*   Compiled with Free Pascal 2.0.4.
+
+Version 6.4 (2007 May 17)
+
+*   Private test version only.
+
+Version 6.3 (2005 August 25)
+
+*   NEEDBOOT's -l option had a bug (or rather, it displayed incomplete
+    information) on the NT platform (NT, 2000, XP, etc.). Now, it displays a
+    complete, and translated, listing of the contents of the
+    PendingFileRenameOperations registry value.
+
+Version 6.2 (2004 October 27)
+
+*   Added OSVEREX utility.
+
+*   OSVER used older terminology when referring to Terminal Server "remote
+    administration mode." Updated this to the new lingo: "Remote Desktop."
+
+Version 6.1 (2004 February 27)
+
+*   Added -w timeout feature to WINMSG. Changed -f problem exit code to 9, and
+    the timeout exit code is 8.
+
+*   Added -l (list entries) feature to NEEDBOOT.
+
+*   Added sample script LICENSE.BAT to the distribution to demonstrate simple
+    cross-platform shell script programming using OSVER and WINMSG.
+
+Version 6.0 (2004 February 13)
+
+*   OSVER can now detect if the current machine is a Terminal Server running in
+    either remote administration or application server mode. Also, -r returns
+    99 instead of 0 if the NT platform was not detected or if OSVER failed to
+    determine the system's role.
+
+*   RASCONNS can now list active RAS connections, and it can also check if a
+    particular connection is currently connected.
+
+*   WINMSG can now display a customized dialog box and returns which button was
+    pressed by the user. The dialog box text can also be read from a file.
+
+Version 5.5 (2004 January 28)
+
+*   Added NEEDBOOT.
+
+*   Fixed minor bug in OSVER that might have caused a memory leak under some
+    conditions.
+
+Version 5.0 (2004 January 26)
+
+*   Corrected subtle bug in isadmin.exe, that seemed to cause it to fail if a
+    computer was a workgroup rather than a domain member. The new method is
+    also slightly faster.
+
+*   Added ISMEMBER.
+
+*   Adjusted the Windows version resources in the executables to report correct
+    translation information.
+
+*   Found and corrected two other (minor) memory leaks.
+
+*   Tools now compiled with FPC 1.0.10.
+
+Version 4.1 (2003 December 15)
+
+*   Corrected a memory leak bug in ISADMIN. Also, now it won't complain if you
+    specify an invalid command-line parameter.
+
+*   Added FAQ file.
+
+Version 4 (2003 December 11)
+
+*   Added ISADMIN.
+
+*   Corrected typos for FVER (-r instead of -t now).
+
+*   Changed icon in WINMSG error dialog to "critical error" instead of
+    "exclamation."
+
+Version 3 (2003 June 19)
+
+*   Renamed FILEVER to FVER to avoid confusion with the Microsoft tool of the
+    same name.
+
+*   Updated OSVER to detect Windows Server 2003 (Windows NT 5.2).
+
+*   Updated code in OSVER that reads the service pack level. It should now
+    detect the service pack more reliably.
+
+*   No other code changes. Only updated the documentation and the sign-on
+    banners when the programs run, as well as their version information.
+
+Version 2 (2002 January 18)
+
+*   Initial version.

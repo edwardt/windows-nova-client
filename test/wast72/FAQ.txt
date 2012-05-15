@@ -1,0 +1,127 @@
+Windows Admin Script Tools Frequently Asked Questions
+
+(C) 2001-2011 by Bill Stewart (bstewart@iname.com)
+
+Last update: 24Feb2011
+
+Q1.   Why are some versions of the tools such as IsAdmin.exe are flagged as
+      suspicious/virus/malware by some anti-virus or malware scanners?
+
+A1.   The answer to this question seems to be that someone has used one or more
+      of these free tools as malware. I appear to be the unfortunate victim of
+      unscrupulous programmers that would illegitimately use free tools that I
+      provided as a service to the IT community. Rest assured that the tools
+      are not malware.
+
+Q2.   I have placed one of the Windows Admin Script Tools commands in a shell
+      script, but when I double-click on the script, the command doesn't run.
+
+A2.   Any time a shell script calls an executable file, the executable file
+      that it runs must be in a location where the script can find it. On some
+      platforms, when you double-click a shell script from Windows Explorer,
+      the current directory for the script is the same directory that %COMSPEC%
+      started from. In other words, if you have a shell script with the
+      following lines:
+
+      @echo off
+      rem display the current directory
+      cd
+      pause
+
+      and you double-click it from the Windows Explorer, you may see output
+      that looks something like this:
+
+      C:\WINNT\system32
+      Press any key to continue . . .
+
+      This is because the OS calls the COMSPEC variable to run the script, with
+      the directory in the COMSPEC variable being the current directory.
+
+      If you place the .EXE file in the same directory as the script, and that
+      directory is not in the system path, the script is trying to run an
+      executable file it can't find.
+
+      Here are three workarounds to this problem:
+
+      1.  Copy the .EXE file to a directory in the system path.
+
+      2.  Use the %0\..\ syntax to run the .EXE file from inside the script;
+          e.g. '%0\..\ostest' instead of just 'ostest'.
+
+          The %0\..\ shorthand works because %0 expands to the script's file
+          name, and \..\ means "the parent directory." Since %0 includes the
+          file name itself, the \..\ "tricks" the command processor into
+          thinking the file name is a directory, and thus points to the parent
+          directory of a non-existent directory (i.e., the directory the script
+          is in).
+
+      3.  In Windows 2000 and later cmd.exe, you can use a line like this in
+          the script:
+
+          "%~dp0ostest" ...
+
+          The %~dp0 syntax means "return the current script's drive and
+          directory, without quotes." The quotes are needed in case the
+          directory the script is in (or the script's name itself!) contains
+          spaces.
+
+Q3.   How do I check the exit code of a program?
+
+A4.   On the Windows NT/2000/XP etc. platform, you can use cmd.exe's
+      %ERRORLEVEL% dynamic variable to check the exit code; for example:
+
+      ostest -p NT -v 5.1
+      if %ERRORLEVEL% EQU 1 goto :WINXP
+      ...
+
+      ...and so on. On the Windows 9x/Me platform, you are not using cmd.exe
+      but rather command.com, which does not have the %ERRORLEVEL% dynamic
+      variable. You need to check its exit code using IF ERRORLEVEL.
+
+      ostest -p 9x
+      if errorlevel 1 goto :WIN9X
+      ...
+
+      IMPORTANT! When using IF ERRORLEVEL, it is very important that you
+      perform the tests in DESCENDING order, because "IF ERRORLEVEL n" really
+      means "IF ERRORLEVEL >= n." In other words, "IF ERRORLEVEL 0" is ALWAYS
+      TRUE, so the below example won't behave as you might expect:
+
+      fvertest -v 7.0 %windir%\explorer.exe
+      if errorlevel 0 goto :OK
+      if errorlevel 2 goto :UPDATE
+      ...
+
+      You need to do this instead:
+
+      fvertest -v 7.0 %windir%\explorer.exe
+      if errorlevel 2 goto :UPDATE
+      ...
+
+      For a cross-platform shell script, I recommend the "IF ERRORLEVEL n"
+      method (in descending order, of course) because it works on Windows 95
+      and later.
+
+Q4.   What language did you use to write the tools?
+
+A4.   The tools were written and compiled with the Free Pascal Compiler (FPC).
+      FPC's home page is www.freepascal.org.
+
+Q5.   What's the difference between IsAdmin and IsMember?
+
+A5.   IsAdmin is language-independent. It checks for administrator status using
+      the SID (security identifier) of the local Administrators group
+      (S-1-5-32-544), not the name "Administrators." Also, IsAdmin works fine
+      on Windows 9x/Me: It returns an exit code of 1, indicating that the
+      current user is an administrator (this is always the case on a Windows 9x
+      machine, as it has no local security). In addition, IsAdmin handles the
+      case where the current user is a member of Administrators, but the group
+      is not enabled (e.g., if UAC is enabled on Windows Vista and later), in
+      which case it returns an exit code of 2.
+
+      IsMember can check for an arbitrary group name specified on the command
+      line, and can list the user's groups. As such, it is similar to the
+      ifmember.exe program provided by Microsoft in the Resource Kit. Like
+      ifmember, IsMember requires Windows NT 4.0 or later, but it will return
+      an exit code of 255 if you run it on Windows 9x/Me; ifmember does not
+      fail as gracefully on that platform.

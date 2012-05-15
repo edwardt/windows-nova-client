@@ -1,0 +1,44 @@
+IsAdmin
+
+NAME
+    IsAdmin
+
+VERSION
+    7.2; 24Feb2011
+
+AUTHOR
+    Bill Stewart (bstewart@iname.com)
+
+SYNOPSIS
+    isadmin [-q]
+
+AVAILABILITY
+    Win32 - Windows 95, 98, Me, NT 4.0, 2000, XP, 2003, Vista, 2008, etc.
+
+DESCRIPTION
+    IsAdmin checks if the currently logged-on user is a member of the
+    computer's local Administrators group. It can also detect if the current
+    user is a member of Administrators but the group is not enabled.
+
+PARAMETERS
+    -q  Run quietly (no screen output).
+
+EXIT STATUS
+    0   Current user is not a member of Administrators.
+
+    1   Current user is a member of Administrators, or you are running IsAdmin
+        on the Windows 9x/Me platform.
+
+    2   Current user is a member of Administrators, but the Administrators
+        group is not enabled. This is the condition when an administrator logs
+        onto Windows Vista or later and User Account Control (UAC) is enabled.
+
+EXAMPLES
+    isadmin -q
+    if errorlevel 2 goto :NEED_ELEVATION
+    if errorlevel 1 goto :ADMIN
+
+    With these three lines in a shell script, it will branch to the label
+    :NEED_ELEVATION if the current user is a member of Administrators but UAC
+    is active, and it will branch to the label if the currently logged on user
+    is a member of Administrators.

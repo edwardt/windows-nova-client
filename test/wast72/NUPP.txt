@@ -1,0 +1,75 @@
+NUPP
+
+NAME
+    NUPP
+
+VERSION
+    7.2; 24Feb2011
+
+AUTHOR
+    Bill Stewart (bstewart@iname.com)
+
+SYNOPSIS
+    nupp +d: uncpath
+    nupp -d:
+
+AVAILABILITY
+    Win32 - Windows 95, 98, Me, NT 4.0, 2000, XP, 2003, Vista, 2008, etc.
+
+DESCRIPTION
+    NUPP (short for "net use push/pop") is a utility for temporarily mapping a
+    network drive to a particular UNC pathname, then restoring the previous
+    drive mapping.
+
+    It works by determining if a particular drive is mapped. If it is mapped,
+    it creates a text file in the TEMP directory called "NUPPTEMP.d", where "d"
+    is the drive letter you want to map. The file will contain the UNC path
+    associated with the drive letter.
+
+    If the drive had no mapping, the temporary file will simply be a two byte
+    file (containing a carriage return/line feed), indicating no mapping was in
+    use.
+
+    The utility then disconnects the specified drive; after it disconnects the
+    drive, it attempts to map it to the specified UNC path. If this fails, the
+    previous drive mapping is restored and the temporary file is deleted.
+
+    If you restore a drive letter that had no associated mapping, the drive is
+    simply disconnected; e.g. if the temporary file specifies no UNC path to
+    restore.
+
+    This was inspired by Symantec's utility NBPSHPOP.EXE, which appears to be a
+    DOS application that is essentially a wrapper for the "net use" command.
+    This program is superior to Symantec's because it is a native Win32
+    application and is therefore much faster and doesn't generate unnecessary
+    screen output. You can use NUPP.EXE in place of NBPSHPOP.EXE for faster
+    performance if you only support 32-bit clients on the network.
+
+PARAMETERS
+    +d:
+        Maps the specified drive letter.
+
+    uncpath
+        Maps to the specified UNC path, in \\computername\share format. If the
+        drive mapping fails, the previous mapping is restored, and the
+        temporary file is deleted.
+
+    -d:
+        Restores the specified drive's previous mapping. If the program can't
+        find a corresponding NUPPTEMP.d file in the TEMP directory, this is an
+        error condition.
+
+EXIT STATUS
+    0   No errors.
+    1   An error occurred.
+
+EXAMPLES
+    1.  NUPP +V: \\AVS1\vplogon
+
+        Maps drive V: to the "vplogon" share on the server "AVS1". The file
+        NUPPTEMP.V contains the text "\\AVS1\vplogon".
+
+    2.  NUPP -V:
+
+        Restores the mapping of drive V: to its previous value. If drive V: was
+        not mapped to anything, the drive is simply disconnected.

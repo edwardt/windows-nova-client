@@ -1,0 +1,21 @@
+MinWin
+
+NAME
+    MinWin
+
+VERSION
+    7.2; 24Feb2011
+
+AUTHOR
+    Bill Stewart (bstewart@iname.com)
+
+SYNOPSIS
+    minwin
+
+AVAILABILITY
+    Win32 - Windows 95, 98, Me, NT 4.0, 2000, XP, 2003, Vista, 2008, etc.
+
+DESCRIPTION
+    This short program simply minimizes the current window. This is useful for
+    Windows system administrators that want to minimize the console window when
+    a logon script executes.

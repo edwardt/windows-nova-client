@@ -1,0 +1,72 @@
+RASConns
+
+NAME
+    RASConns
+
+VERSION
+    7.2; 24Feb2011
+
+AUTHOR
+    Bill Stewart (bstewart@iname.com)
+
+SYNOPSIS
+    rasconns [-q] [-l] [-c connectionname]
+
+AVAILABILITY
+    Win32 - Windows 95, 98, Me, NT 4.0, 2000, XP, 2003, Vista, 2008, etc.
+
+DESCRIPTION
+    RASConns was designed primarily for use in network logon scripts to detect
+    if a user is connected to the network via a RAS connection (e.g. dial-up or
+    VPN). It can return an exit code equal to the number of current open RAS
+    connections, and it can also determine if a named RAS connection is
+    currently active.
+
+PARAMETERS
+    -q  Run quietly (no screen output).
+    -l  List each active RAS connection.
+    -c  Specifies a connection name.
+
+EXIT STATUS
+    0
+        No RAS connections active, or RAS is not installed.
+
+    1
+        With -c: The specified RAS connection is active.
+
+    > 0
+        Without -c: The number of RAS connections currently active (1 or more).
+
+    If RASConns encounters a Windows API error, it will display one of the
+    following error messages:
+
+    *   LoadLibrary failed for rasapi32.dll - RAS not installed
+    *   GetProcAddress failed for RasEnumConnectionsA - RAS not installed
+
+    If RASConns encounters either of the above errors, it will exit with an
+    exit code of 0.
+
+    If you specify -c and a connection name, RASConns will return an exit code
+    of 1 if the specified connection name is active, or 0 if it is not active.
+
+EXAMPLES
+    1. RASConns -q
+       if errorlevel 1 goto :BYE
+
+       These two lines in a shell script will cause the script to exit
+       (provided the line :BYE is the last line of the file) if a RAS
+       connection is active.
+
+    2. RASConns -q -c "Company VPN"
+       if errorlevel 1 goto :VPN
+
+       This script example will branch to the label :VPN if the RAS connection
+       named Company VPN is currently active.
+
+    3. RASConns -l
+
+       This command will list the currently active RAS connections; it will
+       list one connection per line; for example:
+
+       MyISP Dialup Connection
+       Company VPN

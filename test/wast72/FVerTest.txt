@@ -1,0 +1,73 @@
+FVerTest
+
+NAME
+    FVerTest
+
+VERSION
+    7.2; 24Feb2011
+
+AUTHOR
+    Bill Stewart (bstewart@iname.com)
+
+SYNOPSIS
+    fvertest [-v version] [-q] [d:][path]filename.ext
+
+AVAILABILITY
+    Win32 - Windows 95, 98, Me, NT 4.0, 2000, XP, 2003, Vista, 2008, etc.
+
+DESCRIPTION
+    FVerTest is a short utility designed to help IT professionals with checking
+    file versions for scripting purposes.
+
+    FVerTest tests the file version for a Windows executable file, such as an
+    .EXE or .DLL file, that contains version information. It can report a
+    file's version and it can also compare it to a specified version.
+
+PARAMETERS
+    -v  Specifies that you want to compare the file's version with the version
+        number specified after the -v. Specify version numbers as a.b.c.d,
+        where a = major version, b = minor version, c = release, and d = build.
+        For example, -v 11.0.7.03.32. If you omit any values after the major
+        version, FVerTest assumes zeros (e.g. 11 = 11.0.0.0).
+
+    -q  Tells FVerTest to run silently (no output).
+
+    Note that the file's name must appear after the -v and -q parameters on the
+    command line.
+
+EXIT STATUS
+    0   The file's version is > the version specified after the -v parameter.
+
+    1   The file's version = the version specified after the -v parameter.
+
+    2   The file's version is < the version specified after the -v parameter.
+
+    3   An invalid version number was specified on the command line.
+
+    4   The file was compiled without version information, or one of the calls
+        to the Windows APIs failed.
+
+    5   File not found.
+
+EXAMPLES
+    1.  fvertest c:\windows\system\vbscript.dll
+
+        This command will report the version number of the specified file; e.g.
+
+        [5.7.0.5730] c:\windows\system\vbscript.dll
+
+    2.  fvertest -v 5.7 c:\windows\system32\vbscript.dll
+
+        This command will return an exit code of 0 if the file's version is
+        greater than 5.7.0.0, 1 if the file's version is exactly 5.7.0.0, or 2
+        if the file's version is less than 5.7.0.0. The output appears as
+        follows:
+
+        File's version [5.7.0.5730] > specified version [5.7.0.0]
+
+    3.  fvertest -v 5.7.0.4 -q c:\windows\system32\jscript.dll
+
+        This command will return an exit code of 0 if the file's version is
+        greater than 5.7.0.4, 1 if the file's version is exactly 5.7.0.4, or 2
+        if the file's version is less than 5.7.0.4. The command will run
+        silently.

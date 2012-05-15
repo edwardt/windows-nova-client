@@ -1,0 +1,122 @@
+WinMsg
+
+NAME
+    WinMsg
+
+VERSION
+    7.2; 24Feb2011
+
+AUTHOR
+    Bill Stewart (bstewart@iname.com)
+
+SYNOPSIS
+    winmsg -t title [-m message | -f filename] [-c flags] [-w timeout]
+
+AVAILABILITY
+    Win32 - Windows 95, 98, Me, NT 4.0, 2000, XP, 2003, Vista, 2008, etc.
+
+DESCRIPTION
+    WinMsg displays a dialog box on the screen with the specified message and
+    title. You can also specify a set of flags that can be used to modify the
+    appearance and behavior for the box. It will return an exit code
+    corresponding to which button was pushed.
+
+PARAMETERS
+    -t  Specifies the title of the dialog box. Enclose it in quotes if it
+        contains spaces or tabs.
+
+    -m  Specifies the text for the dialog box. Enclose it in quotes if it
+        contains spaces or tabs. This parameter also supports the following
+        character sequences:
+
+        \n  New line separator
+        \t  Tab character
+        \\  Literal '\' character
+
+        For example, -m "Line 1.\nLine 2." Will appear in the dialog box as:
+
+            Line 1
+            Line 2
+
+    -f  Uses the contents of the specified file as the dialog's text. The file
+        should be a plain text file no larger than 32,767 bytes. (This
+        limitation should not be an issue, since a file that large most likely
+        will not fit in the dialog box anyway.)
+
+    -c  A comma-separated list of flags that determines the appearance and
+        behavior for the message box. The list of flags is listed below.
+
+        OKCancel, AbortRetryIgnore, YesNoCancel, YesNo, RetryCancel
+        - These flags specify what buttons the dialog box should display
+
+        Error, Question, Exclamation, Information
+        - These flags specify which icon the dialog box should display
+
+        DefButton2, DefButton3
+        - These flags specify the default button for the dialog box
+
+        SystemModal
+        - This flag causes the dialog to appear on top of all other windows
+
+        The flags are not case-sensitive.
+
+    -w  Specifies a timeout period in seconds (from 1 to 87.00, or a day). If
+        no dialog buttons are pressed within the specified timeout period,
+        WinMsg will close with an exit code of 8.
+
+    You cannot specify both -m and -f. If you specify both, WinMsg will use
+    whichever was specified first on the command line.
+
+EXIT STATUS
+    WinMsg will return an exit code that corresponds to the button that was
+    used to dismiss the dialog box, as follows:
+
+    OK = 1
+    Cancel = 2
+    Abort = 3
+    Retry = 4
+    Ignore = 5
+    Yes = 6
+    No = 7
+
+    If you specified a timeout period and it elapsed, WinMsg will return an
+    exit code of 8.
+
+    If you use -f, there are several conditions that will cause WinMsg to
+    display an error dialog box:
+
+    *   WinMsg can't find the file
+    *   You have insufficient permissions to access the file
+    *   File is empty
+    *   File is too large (> 32,767 bytes)
+
+    If any of these conditions are true, WinMsg will display an error dialog
+    and return an exit code of 9.
+
+EXAMPLES
+    1. winmsg -t Error -m "Script cannot continue." -c Error,SystemModal
+
+       This command will display a message box contaning the title "Error," the
+       message "Script cannot continue." The message box will appear with an
+       Error icon and will appear on top of all other windows. The exit code
+       will be 1 since there's only a single OK button.
+
+    2. winmsg -t Confirm -m "Are you sure?" -c YesNo,Question
+
+       The dialog will appear with Yes and No buttons, and a Question icon. The
+       exit code will be either 6 or 7.
+
+    3. winmsg -t "Legal Notice" -f \\DC1\NETLOGON\NOTICE.TXT
+         -c OKCancel,Exclamation,SystemModal
+
+       The dialog box contents are read from the specified file. The dialog
+       will have OK and Cancel buttons, an Exclamation icon, and will appear on
+       top of all other windows.
+
+    4. winmsg -t "Logon Complete" -m Groups:\nGroup1\nGroup2\Group3
+         -c Information -w 30
+
+       This will display an informational dialog with an OK button that will
+       remain on the screen for 30 seconds. If the user clicks OK, WinMsg will
+       return an exit code of 1; if the timeout period expires, the exit code
+       will be 8.
