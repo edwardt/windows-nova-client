@@ -1,31 +1,17 @@
-@ECHO OFF
-REM BFCPEOPTIONSTART
-REM Advanced BAT to EXE Converter www.BatToExeConverter.com
-REM BFCPEEXE=
-REM BFCPEICON=
-REM BFCPEICONINDEX=0
-REM BFCPEEMBEDDISPLAY=0
-REM BFCPEEMBEDDELETE=1
-REM BFCPEVERINCLUDE=0
-REM BFCPEVERVERSION=1.0.0.0
-REM BFCPEVERPRODUCT=Product Name
-REM BFCPEVERDESC=Product Description
-REM BFCPEVERCOMPANY=Your Company
-REM BFCPEVERCOPYRIGHT=Copyright Info
-REM BFCPEOPTIONEND
-@ECHO ON
+echo on
+setlocal 
+set LOGFILE=config.log
 pushd
-echo "Setting environment paths"
-set PATH=%PATH%;c:\Python27;c:\Python27\Scripts
-echo "Done Setting paths: %PATH"
+echo Today is %date% >> %LOGFILE%
+echo "Setting environment paths" >> %LOGFILE%
+set PATH=%PATH%;C:\Python27;C:\Python27\Scripts >> %LOGFILE%
+echo "Done Setting paths: %PATH%" >> %LOGFILE%
 popd
 
 pushd
-echo "Installaing Nova Python Client for Windows"
-call pypm install python-novatools
-echo "Done Installaing Nova Python Client for Windows"
-
-echo "Please type anykey to continue ..."
-set /p Continue=
-
+echo "Installaing Nova Python Client for Windows" >> %LOGFILE%
+call pypm install python-novatools >> %LOGFILE%
+echo "Done Installaing Nova Python Client for Windows" >> %LOGFILE%
 popd
+
+endlocal
