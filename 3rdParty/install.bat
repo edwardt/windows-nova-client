@@ -1,13 +1,17 @@
 echo on
-
+setlocal 
+set LOGFILE=config.log
 pushd
-echo "Setting environment paths"
-set PATH=%PATH%;c:\Python27;c:\Python27\Scripts
-echo "Done Setting paths: %PATH"
+echo Today is %date% >> %LOGFILE%
+echo "Setting environment paths" >> %LOGFILE%
+set PATH=%PATH%;C:\Python27;C:\Python27\Scripts >> %LOGFILE%
+echo "Done Setting paths: %PATH%" >> %LOGFILE%
 popd
 
 pushd
-echo "Installaing Nova Python Client for Windows"
-call pypm install python-novatools
-echo "Done Installaing Nova Python Client for Windows"
+echo "Installaing Nova Python Client for Windows" >> %LOGFILE%
+call pypm install python-novatools >> %LOGFILE%
+echo "Done Installaing Nova Python Client for Windows" >> %LOGFILE%
 popd
+type %LOGFILE% >> install.log
+endlocal
