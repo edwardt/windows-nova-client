@@ -19,7 +19,7 @@ echo "Try calling nova tool"
 call C:\Python27\Scripts\nova-script.py
 popd
 	
-echo "Please type anykey to continue ..."
+echo "Please type any key to continue ..."
 echo "Please check config.log for any error. Save config.log for reporting error"
 set /p Continue=
 
